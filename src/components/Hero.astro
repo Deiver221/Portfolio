@@ -1,0 +1,48 @@
+---
+import AvailableBadge from "./AvailableBadge"
+---
+
+<section class="py-16 flex flex-col gap-4">
+
+  <!-- Avatar + badge de disponibilidad -->
+    <div class="flex items-center gap-3">
+      <img
+        src="/avatar.jpg"
+        alt="Tu foto"
+        class="w-14 h-14 rounded-full object-cover"
+      />
+      <AvailableBadge client:load />
+    </div>
+  </div>
+
+  <!-- Título principal -->
+  <h1 class="text-5xl font-bold mt-2">
+    Hey, soy <span class="text-yellow-400">Deiver</span>
+  </h1>
+
+  <!-- Descripción -->
+  <p class="text-gray-400 text-lg max-w-xl leading-relaxed">
+    Estudiante de programación enfocado en desarrollo backend con <span class="">Laravel</span> y <span class="">PHP</span>.
+        Actualmente construyendo proyectos reales y buscando mi primera oportunidad como desarrollador.
+  </p>
+
+  <!-- Botones -->
+  <div class="flex gap-3 mt-2">
+
+    <a
+      href="#contacto"
+      class="flex items-center gap-2 bg-white text-black font-medium px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors"
+    >
+      ✉ Contáctame
+    </a>
+
+    <a
+      href="https://www.linkedin.com/in/deiver-mata"
+      target="_blank"
+      class="flex items-center gap-2 border border-white/20 px-4 py-2 rounded-full text-sm text-gray-300 hover:border-white/50 hover:text-white transition-colors"
+    >
+      LinkedIn
+    </a>
+  </div>
+
+</section>

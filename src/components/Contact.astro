@@ -1,0 +1,68 @@
+---
+const email = "deiverdeve@gmail.com"
+---
+
+<section id="contacto" class="py-16">
+
+  <h2 class="text-2xl font-bold mb-2 flex items-center gap-2">
+    <span class="text-yellow-400">✉</span> Contacto
+  </h2>
+
+  <p class="text-gray-400 mb-8 max-w-md leading-relaxed">
+    ¿Tenés un proyecto en mente o querés charlar sobre una oportunidad?
+    Escribime, respondo en menos de 24hs.
+  </p>
+
+  <!-- Card central -->
+  <div class="border border-white/10 rounded-2xl p-8 flex flex-col gap-6 max-w-md bg-white/5">
+
+    <!-- Email -->
+    <a
+      href={`mailto:${email}`}
+      class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
+    >
+      <span class="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
+        ✉
+      </span>
+      <div>
+        <p class="text-xs text-gray-500">Email</p>
+        <p class="text-sm">{email}</p>
+      </div>
+    </a>
+
+    <hr class="border-white/10" />
+
+    <!-- Redes sociales -->
+    <div class="flex flex-col gap-4">
+      <a
+        href="https://www.linkedin.com/in/deiver-mata"
+        target="_blank"
+        class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
+      >
+        <span class="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
+          💼
+        </span>
+        <div>
+          <p class="text-xs text-gray-500">LinkedIn</p>
+          <p class="text-sm">linkedin.com/in/deiver-mata</p>
+        </div>
+      </a>
+
+      <a
+        href="https://github.com/Deiver221"
+        target="_blank"
+        class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
+      >
+        <span class="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-colors">
+          🐙
+        </span>
+        <div>
+          <p class="text-xs text-gray-500">GitHub</p>
+          <p class="text-sm">github.com/Deiver221</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+
+</section>

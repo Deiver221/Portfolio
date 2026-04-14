@@ -1,0 +1,67 @@
+---
+import TagBadge from './TagBadge.astro'
+interface Props {
+  title: string
+  description: string []
+  tags: string[]
+  image: string
+  codeUrl?: string
+  previewUrl?: string
+  rol?: string
+}
+
+const { title, description, tags, image, codeUrl, previewUrl, rol } = Astro.props
+---
+
+<article class="flex flex-col md:flex-row gap-6 py-8 border-b border-white/10">
+
+  <!-- Imagen -->
+  <img
+    src={image}
+    alt={title}
+    class="w-full md:w-56 h-36 object-cover rounded-lg shrink-0 hover:scale-105 transition-all duration-300"
+  />
+
+  <!-- Contenido -->
+  <div class="flex flex-col gap-2">
+    <h3 class="text-white font-bold text-2xl">{title}</h3>
+
+    
+
+    <!-- Tags -->
+    <div class="flex gap-2 flex-wrap">
+      {tags.map(tag => (
+        <TagBadge tag={tag} />
+      ))}
+    </div>
+
+    <div class="flex flex-col gap-2">
+      {description.map(paragraph => (
+        <p class="text-gray-400 text-sm leading-relaxed">{paragraph}</p>
+      ))}
+    </div>
+
+    <!-- Botones -->
+    <div class="flex gap-3 mt-auto pt-2">
+      {codeUrl && (
+        <a
+          href={codeUrl}
+          target="_blank"
+          class="flex items-center gap-1 text-sm border border-white/20 px-3 py-1.5 rounded-full text-gray-300 hover:border-white/50 hover:text-white transition-colors"
+        >
+          {'<>'} Code
+        </a>
+      )}
+      {previewUrl && (
+        <a
+          href={previewUrl}
+          target="_blank"
+          class="flex items-center gap-1 text-sm border border-white/20 px-3 py-1.5 rounded-full text-gray-300 hover:border-white/50 hover:text-white transition-colors"
+        >
+          🔗 Preview
+        </a>
+      )}
+    </div>
+  </div>
+
+</article>

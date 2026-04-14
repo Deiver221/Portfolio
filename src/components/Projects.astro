@@ -1,0 +1,43 @@
+---
+import ProjectCard from './ProjectCard.astro'
+const projects = [
+  {
+    title: "Sistema de gestión de alquiler de vehículos",
+    description: [
+      "Aplicación web para la gestión de alquiler de vehículos que permite explorar autos disponibles, gestionar reservas y administrar la información del sistema.",
+      "Desarrollé el backend con Laravel, implementando la lógica de negocio, relaciones en base de datos y APIs para la comunicación con el frontend en React."
+    ],
+
+    tags: ["Laravel", "Postgresql", "React", "Tailwind CSS"],
+    image: "/projects/Car-Rental-Image.png",
+    codeUrl: "https://github.com/Deiver221/carrental-frontend",
+    previewUrl: "https://carrental-frontend-omega.vercel.app/",
+    
+  },
+  {
+    title: "Buscador inteligente de vehículos con IA",
+    description: ["Aplicación web que permite buscar vehículos utilizando lenguaje natural, interpretando la intención del usuario para generar resultados personalizados.",
+                  "Implementé el backend con Laravel, integrando la API de Groq para el procesamiento de consultas y construcción de respuestas dinámicas, junto a un frontend en React y Tailwind CSS."
+    ],
+    tags: ["Laravel", "Mysql", "React", "Tailwind CSS"],
+    image: "/projects/AI-Car-Finder-Image.png",
+    codeUrl: "https://github.com/Deiver221/ai-car-finder-frontend",
+    previewUrl: "https://ai-car-finder-frontend.vercel.app/",
+    
+  }
+]
+---
+
+<section id="proyectos" class="py-16">
+
+  <h2 class="text-3xl font-bold mb-2 flex items-center gap-2">
+    <span class="text-yellow-400">{"</>"}</span> Proyectos
+  </h2>
+
+  <div>
+    {projects.map(project => (
+      <ProjectCard {...project} />
+    ))}
+  </div>
+
+</section>

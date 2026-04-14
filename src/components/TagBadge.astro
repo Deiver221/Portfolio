@@ -1,0 +1,53 @@
+---
+import * as simpleIcons from 'simple-icons'
+
+interface Props {
+  tag: string
+  customIcon?: string  // SVG como string
+  customColor?: string // color hex sin el #
+}
+
+const { tag, customIcon, customColor } = Astro.props
+
+const iconSlugs: Record<string, string> = {
+  "React": "siReact",
+  "TypeScript": "siTypescript",
+  "JavaScript": "siJavascript",
+  "Next.js": "siNextdotjs",
+  "Tailwind CSS": "siTailwindcss",
+  "Node.js": "siNodedotjs",
+  "Astro": "siAstro",
+  "Vue": "siVuedotjs",
+  "Python": "siPython",
+  "Docker": "siDocker",
+  "PHP": "siPhp",
+  "Laravel": "siLaravel",
+  "Postgresql": "siPostgresql",
+  "Mysql": "siMysql"
+}
+
+const key = iconSlugs[tag]
+const icon = key ? (simpleIcons as any)[key] : null
+
+const bgColor = customColor ?? icon?.hex ?? 'ffffff'
+---
+
+<span
+  class="flex items-center gap-1.5 text-xs text-white px-2.5 py-1 rounded-full"
+  style={icon
+    ? `background-color: #${icon.hex}25;`
+    : `background-color: rgba(255,255,255,0.1);`
+  }
+>
+  {icon && (
+    <svg
+      role="img"
+      viewBox="0 0 24 24"
+      class="w-3.5 h-3.5 shrink-0"
+      style={`fill: #${icon.hex}`}
+    >
+      <path d={icon.path} />
+    </svg>
+  )}
+  {tag}
+</span>
