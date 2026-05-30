@@ -3,6 +3,7 @@ import TagBadge from './TagBadge.astro'
 interface Props {
   title: string
   description: string []
+  note: string
   tags: string[]
   image: string
   codeUrl?: string
@@ -10,7 +11,7 @@ interface Props {
   rol?: string
 }
 
-const { title, description, tags, image, codeUrl, previewUrl, rol } = Astro.props
+const { title, description, note, tags, image, codeUrl, previewUrl, rol } = Astro.props
 ---
 
 <article class="flex flex-col md:flex-row gap-6 py-8 border-b border-white/10">
@@ -35,10 +36,16 @@ const { title, description, tags, image, codeUrl, previewUrl, rol } = Astro.prop
       ))}
     </div>
 
+    <!-- Descripción -->
     <div class="flex flex-col gap-2">
       {description.map(paragraph => (
         <p class="text-gray-400 text-sm leading-relaxed">{paragraph}</p>
       ))}
+    </div>
+
+    <!-- Nota -->
+    <div class="flex flex-col gap-2">
+      <p class="text-xs text-gray-400"><span class="font-bold text-gray-400">Nota</span>: {note}</p>
     </div>
 
     <!-- Botones -->
