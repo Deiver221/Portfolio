@@ -83,7 +83,7 @@ export const translations = {
       title: "Proyectos",
       code: "Code",
       preview: "Preview",
-      note: "⚠️ Nota",
+      note: "⚠️ Aviso",
       items: [
         {
           title: "Sistema de gestión de alquiler de vehículos",
