@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import '@fontsource-variable/onest/wght.css';
+import LanguageToggle from '../components/LanguageToggle';
 interface Props {
 	title: string
 }
@@ -13,16 +14,18 @@ const { title } = Astro.props
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/src/assets/favico.svg" />
+    <link rel="icon" href="/favico.svg" />
     <title>{title}</title>
   </head>
 
   <body class="bg-[#0a0a0f] text-white min-h-screen">
     <header class="fixed top-0 left-0 right-0 z-50 flex justify-center py-3">
-      <nav class="flex gap-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-2 text-sm">
-        <a href="#proyectos" class="text-gray-300 hover:text-white transition-colors">Proyectos</a>
-        <a href="#sobre-mi" class="text-gray-300 hover:text-white transition-colors">Sobre mí</a>
-        <a href="#contacto" class="text-gray-300 hover:text-white transition-colors">Contacto</a>
+      <nav class="flex items-center gap-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-6 py-2 text-sm">
+        <a id="nav-projects" href="#proyectos" class="text-gray-300 hover:text-white transition-colors"></a>
+        <a id="nav-about" href="#sobre-mi" class="text-gray-300 hover:text-white transition-colors"></a>
+        <a id="nav-contact" href="#contacto" class="text-gray-300 hover:text-white transition-colors"></a>
+        <div class="w-px h-4 bg-white/20"></div>
+        <LanguageToggle client:load />
       </nav>
     </header>
 
@@ -31,13 +34,35 @@ const { title } = Astro.props
     </main>
 
     <footer class="max-w-3xl mx-auto px-6 py-8 mt-20 border-t border-white/10 text-sm text-gray-500 flex justify-between">
-      <span>© 2026 Deiver. Todos los derechos reservados.</span>
-      <div class="flex gap-4">
-        <a href="#sobre-mi" class="hover:text-white transition-colors">Sobre mí</a>
-        <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
-      </div>
+        <span>© 2026 Deiver. <span id="footer-rights"></span></span>
+          <div class="flex gap-4">
+            <a id="footer-about" href="#sobre-mi" class="hover:text-white transition-colors"></a>
+            <a id="footer-contact" href="#contacto" class="hover:text-white transition-colors"></a>
+          </div>
     </footer>
 
+    <script>
+      import { getLang } from "../i18n/utils"
+      import { translations } from "../i18n/translations"
+      import type { Language } from "../i18n/translations"
+
+      function updateLayout(lang: Language) {
+        const t = translations[lang]
+        document.getElementById("nav-projects")!.textContent = t.nav.projects
+        document.getElementById("nav-about")!.textContent = t.nav.about
+        document.getElementById("nav-contact")!.textContent = t.nav.contact
+        document.getElementById("footer-rights")!.textContent = t.footer.rights
+        document.getElementById("footer-about")!.textContent = t.nav.about
+        document.getElementById("footer-contact")!.textContent = t.nav.contact
+      }
+
+      updateLayout(getLang())
+
+      window.addEventListener("langchange", (e) => {
+        updateLayout((e as CustomEvent<Language>).detail)
+      })
+    </script>
+    
   </body>
 </html>
 

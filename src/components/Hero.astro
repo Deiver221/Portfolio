@@ -2,39 +2,28 @@
 import AvailableBadge from "./AvailableBadge"
 ---
 
-<section class="py-16 flex flex-col gap-4">
-
-  <!-- Avatar + badge de disponibilidad -->
-    <div class="flex items-center gap-3">
-      <img
-        src="/me.webp"
-        alt="Tu foto"
-        class="w-14 h-14 rounded-full object-cover"
-      />
-      <AvailableBadge client:load />
-    </div>
+<section class="py-16 flex flex-col gap-4" id="hero">
+  <div class="flex items-center gap-3">
+    <img
+      src="/me.webp"
+      alt="Foto de perfil"
+      class="w-14 h-14 rounded-full object-cover"
+    />
+    <AvailableBadge client:load />
   </div>
 
-  <!-- Título principal -->
   <h1 class="text-5xl font-bold mt-2">
-    Hey, soy <span class="text-yellow-400">Deiver</span>
+    <span id="hero-title"></span> <span class="text-yellow-400">Deiver</span>
   </h1>
 
-  <!-- Descripción -->
-  <p class="text-gray-400 text-lg max-w-xl leading-relaxed">
-    Desarrollador Backend en formación especializado en Laravel y PHP. Construyendo aplicaciones reales y buscando mi primera oportunidad profesional.
-  </p>
+  <p id="hero-description" class="text-gray-400 text-lg max-w-xl leading-relaxed"></p>
 
-  <!-- Botones -->
   <div class="flex gap-3 mt-2">
-
     <a
       href="#contacto"
+      id="hero-contact"
       class="flex items-center gap-2 bg-white text-black font-medium px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors"
-    >
-      ✉ Contáctame
-    </a>
-
+    ></a>
     <a
       href="https://www.linkedin.com/in/deiver-mata"
       target="_blank"
@@ -43,5 +32,23 @@ import AvailableBadge from "./AvailableBadge"
       LinkedIn
     </a>
   </div>
-
 </section>
+
+<script>
+  import { getLang, setLang } from "../i18n/utils"
+  import { translations } from "../i18n/translations"
+  import type { Language } from "../i18n/translations"
+
+  function updateHero(lang: Language) {
+    const t = translations[lang].hero
+    document.getElementById("hero-title")!.textContent = t.title
+    document.getElementById("hero-description")!.textContent = t.description
+    document.getElementById("hero-contact")!.textContent = t.contact
+  }
+
+  updateHero(getLang())
+
+  window.addEventListener("langchange", (e) => {
+    updateHero((e as CustomEvent<Language>).detail)
+  })
+</script>

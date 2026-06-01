@@ -1,54 +1,51 @@
 ---
 import TagBadge from './TagBadge.astro'
+
 interface Props {
   title: string
-  description: string []
+  description: string[]
   note: string
   tags: string[]
   image: string
   codeUrl?: string
   previewUrl?: string
-  rol?: string
+  codeLabel?: string
+  previewLabel?: string
+  noteLabel?: string
+  index: number
 }
 
-const { title, description, note, tags, image, codeUrl, previewUrl, rol } = Astro.props
+const { title, description, note, tags, image, codeUrl, previewUrl, codeLabel = "Code", previewLabel = "Preview", noteLabel = "Note", index } = Astro.props
 ---
 
-<article class="flex flex-col md:flex-row gap-6 py-8 border-b border-white/10">
-
-  <!-- Imagen -->
+<article
+  class="flex flex-col md:flex-row gap-6 py-8 border-b border-white/10"
+  data-project-index={index}
+>
   <img
     src={image}
     alt={title}
     class="w-full md:w-56 h-36 object-cover rounded-lg shrink-0 hover:scale-105 transition-all duration-300"
   />
 
-  <!-- Contenido -->
   <div class="flex flex-col gap-2">
-    <h3 class="text-white font-bold text-2xl">{title}</h3>
+    <h3 class="text-white font-bold text-2xl" data-project-title>{title}</h3>
 
-    
-
-    <!-- Tags -->
     <div class="flex gap-2 flex-wrap">
-      {tags.map(tag => (
-        <TagBadge tag={tag} />
-      ))}
+      {tags.map(tag => <TagBadge tag={tag} />)}
     </div>
 
-    <!-- Descripción -->
     <div class="flex flex-col gap-2">
       {description.map(paragraph => (
-        <p class="text-gray-400 text-sm leading-relaxed">{paragraph}</p>
+        <p class="text-gray-400 text-sm leading-relaxed" data-project-desc>{paragraph}</p>
       ))}
     </div>
 
-    <!-- Nota -->
-    <div class="flex flex-col gap-2">
-      <p class="text-xs text-gray-400"><span class="font-bold text-gray-400">Nota</span>: {note}</p>
-    </div>
+    <p class="text-xs text-gray-400">
+      <span class="font-bold" data-note-label>{noteLabel}:</span>
+      <span data-project-note>{note}</span>
+    </p>
 
-    <!-- Botones -->
     <div class="flex gap-3 mt-auto pt-2">
       {codeUrl && (
         <a
@@ -56,7 +53,7 @@ const { title, description, note, tags, image, codeUrl, previewUrl, rol } = Astr
           target="_blank"
           class="flex items-center gap-1 text-sm border border-white/20 px-3 py-1.5 rounded-full text-gray-300 hover:border-white/50 hover:text-white transition-colors"
         >
-          {'<>'} Code
+          {'<>'} {codeLabel}
         </a>
       )}
       {previewUrl && (
@@ -65,10 +62,9 @@ const { title, description, note, tags, image, codeUrl, previewUrl, rol } = Astr
           target="_blank"
           class="flex items-center gap-1 text-sm border border-white/20 px-3 py-1.5 rounded-full text-gray-300 hover:border-white/50 hover:text-white transition-colors"
         >
-          🔗 Preview
+          🔗 {previewLabel}
         </a>
       )}
     </div>
   </div>
-
 </article>

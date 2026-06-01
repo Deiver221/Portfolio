@@ -1,13 +1,30 @@
+import { useState, useEffect } from "react"
+import { getLang } from "../i18n/utils"
+import { translations } from "../i18n/translations"
+import type { Language } from "../i18n/translations"
+
 export default function AvailableBadge() {
+  const [lang, setLang] = useState<Language>("en")
+
+  useEffect(() => {
+    setLang(getLang())
+
+    const handler = (e: Event) => {
+      setLang((e as CustomEvent<Language>).detail)
+    }
+
+    window.addEventListener("langchange", handler)
+    return () => window.removeEventListener("langchange", handler)
+  }, [])
+
+  const text = translations[lang].hero.available
+
   return (
     <>
       <style>{`
         @keyframes rotate {
-          100% {
-            transform: rotate(1turn);
-          }
+          100% { transform: rotate(1turn); }
         }
-
         .rainbow::before {
           content: '';
           position: absolute;
@@ -27,7 +44,7 @@ export default function AvailableBadge() {
       <div className="rainbow relative z-0 overflow-hidden p-0.5 flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
         <span className="px-4 text-sm py-1.5 text-white rounded-full font-medium bg-[#0a0a0f]/90 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse inline-block"></span>
-          Disponible para trabajar
+          {text}
         </span>
       </div>
     </>
